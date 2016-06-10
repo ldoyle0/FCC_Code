@@ -9,7 +9,7 @@ function isPrime(num){
 
 function sumPrimes(n){
     var primes = [2];
-    for ( var i = 3; i < n; i++){
+    for ( var i = 3; i <= n; i++){
         if ( isPrime(i) ){
             primes.push(i);
         }
