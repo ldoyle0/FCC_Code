@@ -1,13 +1,25 @@
 function steamrollArray(arr) {
+  var flatArray=[];
   
-  var newArr = [];
-  var exit = 0;
-  while(exit = 0){
-    if(Array.isArray(arr)){
-      
+  for (var i = 0; i < arr.length; i++) {
+    if (!Array.isArray(arr[i])) {
+      flatArray.push(arr[i]);
+    } else {
+      flatten(arr[i]);
     }
   }
-  return arr;
+ 
+  function flatten(nestedArr) {
+    for (var j = 0; j < nestedArr.length; j++) {
+      if (!Array.isArray(nestedArr[j])) {
+        flatArray.push(nestedArr[j]);
+      } else {
+        flatten(nestedArr[j]);
+      }
+    }
+  }
+    
+  return flatArray;
 }
 
 steamrollArray([1, [2], [3, [[4]]]]);
