@@ -11,7 +11,7 @@ function checkCashRegister(price, cash, cid) {
     
   }
   
-  return totalcid;
+  return totalcid.toFixed(2);
 }
 
 // Example cash-in-drawer array:
