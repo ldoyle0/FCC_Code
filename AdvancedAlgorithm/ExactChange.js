@@ -2,6 +2,8 @@
 function checkCashRegister(price, cash, cid) {
   var change = +(cash - price).toFixed(2);
   var totalcid = 0;
+  var denominations = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
+  
   // Here is your change, ma'am.
   for (var i = 0; i < cid.length; i++){
     totalcid += cid[i][1];
@@ -16,11 +18,22 @@ function checkCashRegister(price, cash, cid) {
     return 'Closed';
   }
   
-  for(var j = 0; j < cid.length - 1; j++){
+  var changeArr = [];
+  
+  for(var j = 0; j < cid.length; j++){
+    
+    if(denominations[i] <= change){
       
+      if(){
+        
+      }
+    }
+    
+    
+    changeArr.push(denominations[j]);    
   }
   
-  return totalCash;
+  return changeArr;
 }
 
 // Example cash-in-drawer array:
