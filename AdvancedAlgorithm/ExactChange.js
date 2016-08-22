@@ -1,17 +1,26 @@
 
 function checkCashRegister(price, cash, cid) {
-  var change = cash - price;
+  var change = +(cash - price).toFixed(2);
   var totalcid = 0;
   // Here is your change, ma'am.
   for (var i = 0; i < cid.length; i++){
     totalcid += cid[i][1];
   }
   
-  if (totalcid > change){
-    
+  var totalCash = +totalcid.toFixed(2);
+
+//Check to see if there is sufficient cash in the drawer or if the cash in the drawer is equivalent to the change needed  
+  if (totalCash < change){
+    return 'Insufficient Funds';
+  }else if (totalcid === change){
+    return 'Closed';
   }
   
-  return totalcid.toFixed(2);
+  for(var j = 0; j < cid.length - 1; j++){
+      
+  }
+  
+  return totalCash;
 }
 
 // Example cash-in-drawer array:
