@@ -12,9 +12,9 @@ function checkCashRegister(price, cash, cid) {
   var totalCash = +totalcid.toFixed(2);
 
 //Check to see if there is sufficient cash in the drawer or if the cash in the drawer is equivalent to the change needed  
-  if (totalCash < change){
+  if (change > totalCash){
     return 'Insufficient Funds';
-  }else if (totalcid === change){
+  }else if (change === totalCash){
     return 'Closed';
   }
   
