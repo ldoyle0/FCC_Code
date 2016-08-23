@@ -19,18 +19,29 @@ function checkCashRegister(price, cash, cid) {
   }
   
   var changeArr = [];
+  var cidDenom;
+  var currentDenom;
+  var changeAmount;
   
-  for(var j = 0; j < cid.length; j++){
+  for(var j = +cid.length - 1; j >= 0; j--){
     
-    if(denominations[i] <= change){
+    cidDenom = cid[j][1];
+    currentDenom = cid[j][0];
+    
+    if(denominations[j] <= change){
+  
+      changeAmount = Math.floor(cidDenom/denominations[j]);
       
-      if(){
+      if((denominations[j] * changeAmount) >= change){
         
+        changeAmount = Math.floor(change / denominations[j]);
       }
+      
+      cidDenom = +(changeAmount * denominations[j]).toFixed(2);
+      change = +(change - cidDenom).toFixed(2);
+      cid[j][1] = cidDenom;
     }
-    
-    
-    changeArr.push(denominations[j]);    
+    changeArr.push([currentDenom, cidDenom]);    
   }
   
   return changeArr;
