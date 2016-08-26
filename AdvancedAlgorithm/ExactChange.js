@@ -22,7 +22,7 @@ function checkCashRegister(price, cash, cid) {
   var value = 0;
   
   for (var i = denom.length - 1; i >= 0; i--){
-    var cidDenom = cid[i][0];
+
     var cidValue = cid[i][1];
     
     if (denom[i] <= change){
@@ -34,12 +34,12 @@ function checkCashRegister(price, cash, cid) {
         value = Math.floor(change / denom[i]);
       }
       
-      cidValue = Math.floor((denom[i] * value)*100)/100;
-      change = Math.floor((change - cidValue)*100)/100;
+      cidValue = +(denom[i] * value).toFixed(2);
+      change = +(change - cidValue).toFixed(2);
       
       cid[i][1] = cidValue;
       
-      changeArr.push([cidDenom, cidValue]);
+      changeArr.push([cid[i][0], cidValue]);
     }
   }
 
