@@ -12,11 +12,14 @@ function updateInventory(arr1, arr2) {
     var totalInv = [];
     var newTotal = 0;
 
-    for (var j = 1; j < arrR.length; j++) {
+    for (var j = arrR.length - 1; j >= 0; j--) {
+        
+        var value1 = arrR[j-1][0];
+        var value2 = arrR[j][0];
 
-        if (arrR[j][0].valueOf() == arrR[j + 1][0].valueOf()) {
+        if (value1 == value2) {
             
-            newTotal = +arrR[j][1] + +arrR[j + 1][1];
+            newTotal = arrR[j][1] + arrR[j - 1][1];
             
             totalInv.push([arrR[j][0], newTotal]);
 
