@@ -1,62 +1,65 @@
-
 function checkCashRegister(price, cash, cid) {
-  var change = +(cash - price).toFixed(2);
-  var totalcid = 0;
-  var denominations = [0.01, 0.05, 0.10, 0.25, 1, 5, 10, 20, 100];
-  
-  // Here is your change, ma'am.
-  for (var i = 0; i < cid.length; i++){
-    totalcid += cid[i][1];
-  }
-  
-  var totalCash = +totalcid.toFixed(2);
 
-//Check to see if there is sufficient cash in the drawer or if the cash in the drawer is equivalent to the change needed  
-  if (change > totalCash){
+  var change = cash - price;
+  var denom = [0.01, 0.05, 0.10, 0.25, 1.00, 5.00, 10.00, 20.00, 100.00];
+
+  var register = cid.reduce(function(acc, curr) {
+    acc.total += curr[1];
+    acc[curr[0]] = curr[1];
+    return acc;
+  }, {total: 0});
+
+
+  //Check to see if there is sufficient cash in the drawer or if the cash in the drawer is equivalent to the change needed  
+  if (change > register.total) {
     return 'Insufficient Funds';
-  }else if (change === totalCash){
+  }
+  else if (change === register.total) {
     return 'Closed';
   }
-  
+
   var changeArr = [];
-  var cidDenom;
-  var currentDenom;
-  var changeAmount;
+  var value = 0;
   
-  for(var j = +cid.length - 1; j >= 0; j--){
+  for (var i = denom.length - 1; i >= 0; i--){
+    var cidDenom = cid[i][0];
+    var cidValue = cid[i][1];
     
-    cidDenom = cid[j][1];
-    currentDenom = cid[j][0];
-    
-    if(denominations[j] <= change){
-  
-      changeAmount = Math.floor(cidDenom/denominations[j]);
+    if (denom[i] <= change){
       
-      if((denominations[j] * changeAmount) >= change){
+      value = Math.floor(cidValue / denom[i]);
+      
+      if((denom[i] * value) >= change){
         
-        changeAmount = Math.floor(change / denominations[j]);
+        value = Math.floor(change / denom[i]);
       }
       
-      cidDenom = +(changeAmount * denominations[j]).toFixed(2);
-      change = +(change - cidDenom).toFixed(2);
-      cid[j][1] = cidDenom;
+      cidValue = Math.floor((denom[i] * value)*100)/100;
+      change = Math.floor((change - cidValue)*100)/100;
+      
+      cid[i][1] = cidValue;
+      
+      changeArr.push([cidDenom, cidValue]);
     }
-    changeArr.push([currentDenom, cidDenom]);    
   }
-  
+
+  if (changeArr.length < 1 || change > 0) {
+    return "Insufficient Funds";
+  }
+
+
   return changeArr;
 }
 
-// Example cash-in-drawer array:
-// [["PENNY", 1.01],
-// ["NICKEL", 2.05],
-// ["DIME", 3.10],
-// ["QUARTER", 4.25],
-// ["ONE", 90.00],
-// ["FIVE", 55.00],
-// ["TEN", 20.00],
-// ["TWENTY", 60.00],
-// ["ONE HUNDRED", 100.00]]
 
-checkCashRegister(19.50, 20.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], 
-["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]);
+checkCashRegister(19.50, 20.00, [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.10],
+  ["QUARTER", 4.25],
+  ["ONE", 90.00],
+  ["FIVE", 55.00],
+  ["TEN", 20.00],
+  ["TWENTY", 60.00],
+  ["ONE HUNDRED", 100.00]
+]);
