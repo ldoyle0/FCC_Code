@@ -1,14 +1,30 @@
 function updateInventory(arr1, arr2) {
     // All inventory must be accounted for or you're fired!
-    var arrI = arr1.concat(arr2);
+    var arrInv = arr1.concat(arr2);
+    
+    //Reverse the array so the string is first
+    for (var i = 0; i < arrInv.length; i++) {
 
-    for (var i = 0; i < arrI.length; i++) {
+        arrInv[i].reverse();
+
+    }
+    
+    var arrRev = arrInv.sort();
+
+    for (var j = 0; j < arrRev.length; j++){
+        
+    }
+
+    return arrRev
+
+//Switch the order of item and quantity
+/*    for (var i = 0; i < arrI.length; i++) {
 
         arrI[i].reverse();
 
     }
 
-    var arrR = arrI.sort();
+    var arrR = arrI.sort();.
     var totalInv = [];
     var newTotal = 0;
 
@@ -29,7 +45,7 @@ function updateInventory(arr1, arr2) {
         }
     } 
 
-    return totalInv;
+    return totalInv; */
 }
 
 // Example inventory lists
