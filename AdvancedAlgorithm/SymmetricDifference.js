@@ -1,20 +1,28 @@
 function sym() {
-  
-  var master = [];
-  
-  for (var i = 0; i < this.length; i++){
-    var current = this[i];
-    if(master.indexOf(current) < 0){
-      master.push(current);
+    var args = [];
+    for (var i = 0; i < arguments.length; i++) {
+        args.push(arguments[i]);
     }
-  }
-  
-//  var flatArr = master.reduce(function(a,b){
-//    return a.concat(b);
-//  },[]);
-//  
-//  return flatArr;
-  return master;
+ 
+    function symDiff(arrayOne, arrayTwo) {
+        var result = [];
+ 
+        arrayOne.forEach(function(item) {
+            if (arrayTwo.indexOf(item) < 0 && result.indexOf(item) < 0) {
+                result.push(item);
+            }
+        });
+ 
+        arrayTwo.forEach(function(item) {
+            if (arrayOne.indexOf(item) < 0 && result.indexOf(item) < 0) {
+                result.push(item);
+            }
+        });
+ 
+        return result;
+    }
+ 
+    return args.reduce(symDiff);
 }
 
 sym([1, 2, 3], [5, 2, 1, 4]);
